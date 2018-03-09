@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>squirrelcleaner</id>
+    <version>[VERSION]</version>
+	<title>Squirrel Cleaner</title>
+    <authors>CatenaLogic</authors>
+	
+	<description>
+	  Cleans the squirrel deployment channels.
+	</description>
+    
+	<summary>
+	</summary>
+	
+	<tags>squirrel cleaner disk space</tags>
+	
+	<language>en-US</language>
+	<projectUrl>https://github.com/CatenaLogic/SquirrelCleaner/</projectUrl>	
+	<licenseUrl>https://github.com/CatenaLogic/SquirrelCleaner/blob/develop/LICENSE</licenseUrl>
+	<iconUrl>https://raw.githubusercontent.com/CatenaLogic/SquirrelCleaner/develop/design/logo/logo_128.png</iconUrl>
+  </metadata>
+</package>

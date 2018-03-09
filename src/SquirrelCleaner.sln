@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelCleaner", "SquirrelCleaner\SquirrelCleaner.csproj", "{87743E11-D05A-496C-B9F6-E1174215C041}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3FC2F6BF-A28C-474B-92A4-BEED6C98BAC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{8E1BFB30-E258-4E17-B83C-301F3D1E4071}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+		SquirrelCleaner.sln.DotSettings = SquirrelCleaner.sln.DotSettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F4EE9B75-6EDA-46D0-B3EC-45ADA5B69FE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7987CAA-E9CC-4BAF-B693-491B7957E067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelCleaner.Tests", "SquirrelCleaner.Tests\SquirrelCleaner.Tests.csproj", "{C5A56DEF-9D19-47F0-8685-3E16B1F1902E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87743E11-D05A-496C-B9F6-E1174215C041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87743E11-D05A-496C-B9F6-E1174215C041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87743E11-D05A-496C-B9F6-E1174215C041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87743E11-D05A-496C-B9F6-E1174215C041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A56DEF-9D19-47F0-8685-3E16B1F1902E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A56DEF-9D19-47F0-8685-3E16B1F1902E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A56DEF-9D19-47F0-8685-3E16B1F1902E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A56DEF-9D19-47F0-8685-3E16B1F1902E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87743E11-D05A-496C-B9F6-E1174215C041} = {F4EE9B75-6EDA-46D0-B3EC-45ADA5B69FE8}
+		{F4EE9B75-6EDA-46D0-B3EC-45ADA5B69FE8} = {3FC2F6BF-A28C-474B-92A4-BEED6C98BAC6}
+		{F7987CAA-E9CC-4BAF-B693-491B7957E067} = {3FC2F6BF-A28C-474B-92A4-BEED6C98BAC6}
+		{C5A56DEF-9D19-47F0-8685-3E16B1F1902E} = {F7987CAA-E9CC-4BAF-B693-491B7957E067}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14F3B293-FB5F-4491-8362-2C9C9D7025BE}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal
