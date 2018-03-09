@@ -27,13 +27,17 @@ namespace SquirrelCleaner.Cleaners
 
         protected override bool CanCleanChannel(Channel channel)
         {
-            var releasesToPurge = GetReleasesToPurge(channel);
-            return releasesToPurge.Count > 0;
+            // For now, always allow cleaning because of RELEASES file
+            return true;
+
+            //var releasesToPurge = GetReleasesToPurge(channel);
+            //return releasesToPurge.Count > 0;
         }
 
         protected override long CalculateCleanableSpaceForChannel(Channel channel)
         {
-            var size = 0L;
+            // Always 1 because of RELEASES file
+            var size = 1L;
 
             var releasesToPurge = GetReleasesToPurge(channel);
 
