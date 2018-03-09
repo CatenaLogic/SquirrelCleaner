@@ -8,6 +8,7 @@
 namespace SquirrelCleaner.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Catel;
@@ -17,6 +18,7 @@ namespace SquirrelCleaner.ViewModels
     using Catel.MVVM;
     using Catel.Reflection;
     using Catel.Services;
+    using Catel.Threading;
     using Models;
     using Services;
 
@@ -151,7 +153,10 @@ namespace SquirrelCleaner.ViewModels
 
             using (CreateIsBusyScope())
             {
-                var channels = (await _channelService.FindChannelsAsync(channelsRoot)).ToList();
+                var channels = new List<Channel>();
+
+                await TaskHelper.Run(async () => { channels.AddRange(await _channelService.FindChannelsAsync(channelsRoot)); });
+
                 if (channels.Count > 0)
                 {
                     using (Channels.SuspendChangeNotifications())
@@ -177,7 +182,7 @@ namespace SquirrelCleaner.ViewModels
                 {
                     completedChannels++;
 
-                    var percentage = ((double) completedChannels / totalChannels) * 100;
+                    var percentage = ((double)completedChannels / totalChannels) * 100;
                     Progress = (int)percentage;
                 }));
             }
@@ -247,7 +252,13 @@ namespace SquirrelCleaner.ViewModels
 
         private IDisposable CreateIsBusyScope()
         {
-            return new DisposableToken<MainViewModel>(this, x => x.Instance.IsBusy = true, x => x.Instance.IsBusy = false);
+            return new DisposableToken<MainViewModel>(this, x =>
+            {
+                x.Instance._dispatcherService.BeginInvoke(() => x.Instance.IsBusy = true);
+            }, x =>
+            {
+                x.Instance._dispatcherService.BeginInvoke(() => x.Instance.IsBusy = false);
+            });
         }
         #endregion
     }
