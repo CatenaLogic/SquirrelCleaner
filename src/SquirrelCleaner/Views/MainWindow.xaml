@@ -7,10 +7,11 @@
               xmlns:views="clr-namespace:SquirrelCleaner.Views"
               xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
               xmlns:converters="clr-namespace:SquirrelCleaner.Converters"
-              xmlns:orc="http://www.wildgums.net.au/orc"
+              xmlns:orccontrols="http://schemas.wildgums.com/orc/controls"
+              xmlns:orclogviewer="http://schemas.wildgums.com/orc/logviewer"
               mc:Ignorable="d" MinWidth="1000" MinHeight="800">
 
-    <orc:StackGrid>
+    <orccontrols:StackGrid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -97,15 +98,15 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <orc:AdvancedLogViewerControl Margin="-4,12,-4,4" />
+        <orclogviewer:AdvancedLogViewerControl Margin="-4,12,-4,4" />
 
         <ProgressBar Height="5" Visibility="{Binding IsBusy, Converter={catel:BooleanToHidingVisibilityConverter}}" 
                      Minimum="0" Maximum="100" Value="{Binding Progress, Mode=OneWay}" Margin="0,4,0,4"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <orc:AnimatedGif Visibility="{Binding IsBusy, Converter={catel:BooleanToHidingVisibilityConverter}}" 
-                             GifSource="/Resources/Images/Loading.gif" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                             Width="24" Height="24" Margin="4,8,4,4" />
+            <orccontrols:AnimatedGif Visibility="{Binding IsBusy, Converter={catel:BooleanToHidingVisibilityConverter}}" 
+                                     GifSource="/Resources/Images/Loading.gif" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                     Width="24" Height="24" Margin="4,8,4,4" />
 
             <Button Content="Analyze" Command="{Binding Analyze}" Style="{StaticResource RightAlignedFixedSizeButtonStyle}" />
             <Button Content="Fake clean up" Command="{Binding FakeCleanUp}" Style="{StaticResource RightAlignedFixedSizeButtonStyle}"
@@ -113,7 +114,7 @@
             <Button Content="Clean up" Command="{Binding CleanUp}" Style="{StaticResource RightAlignedFixedSizeButtonStyle}" 
                     ToolTip="Run the whole clean up in real mode -> actually cleaning up everything"/>
         </StackPanel>
-    </orc:StackGrid>
+    </orccontrols:StackGrid>
 
 </catel:Window>
 
