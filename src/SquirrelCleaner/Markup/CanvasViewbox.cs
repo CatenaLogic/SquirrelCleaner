@@ -55,7 +55,7 @@ namespace SquirrelCleaner.Markup
                     var path = child as Path;
                     if (path != null)
                     {
-                        path.Fill = Foreground;
+                        path.SetCurrentValue(Shape.FillProperty, Foreground);
                     }
                 }
             }

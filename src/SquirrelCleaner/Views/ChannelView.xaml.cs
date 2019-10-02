@@ -28,7 +28,7 @@ namespace SquirrelCleaner.Views
 
             if (layoutRoot.Visibility != Visibility.Visible)
             {
-                Dispatcher.BeginInvoke(() => layoutRoot.Visibility = Visibility.Visible);
+                Dispatcher.BeginInvoke(() => layoutRoot.SetCurrentValue(FrameworkElement.VisibilityProperty, Visibility.Visible));
             }
         }
     }

@@ -67,7 +67,7 @@ namespace SquirrelCleaner.Services
         [Time]
         public async Task CleanAsync(Channel channel, bool isFakeClean)
         {
-            ChannelCleaning.SafeInvoke(this, new ChannelEventArgs(channel));
+            ChannelCleaning?.Invoke(this, new ChannelEventArgs(channel));
 
             Log.Info("Cleaning channel '{0}'", channel);
             Log.Indent();
@@ -91,7 +91,7 @@ namespace SquirrelCleaner.Services
             Log.Unindent();
             Log.Info("Cleaned channel '{0}'", channel);
 
-            ChannelCleaned.SafeInvoke(this, new ChannelEventArgs(channel));
+            ChannelCleaned?.Invoke(this, new ChannelEventArgs(channel));
         }
     }
 }
