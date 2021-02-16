@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>net462</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>
     <AssemblyName>SquirrelCleaner.Tests</AssemblyName>
     <RootNamespace>SquirrelCleaner.Tests</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -30,7 +30,6 @@
     <PackageReference Include="ModuleInit.Fody" Version="2.1.1" PrivateAssets="all" />
     <PackageReference Include="NUnit" Version="3.13.1" PrivateAssets="all" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-    <PackageReference Include="Obsolete.Fody" Version="5.2.1" PrivateAssets="all" />
     <PackageReference Include="Orc.Csv" Version="4.1.0" />
     <PackageReference Include="PublicApiGenerator" Version="10.2.0" PrivateAssets="all" />
   </ItemGroup>

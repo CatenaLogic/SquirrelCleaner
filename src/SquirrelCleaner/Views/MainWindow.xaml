@@ -5,7 +5,7 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:catel="http://schemas.catelproject.com"
               xmlns:views="clr-namespace:SquirrelCleaner.Views"
-              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              xmlns:xamlbehaviors="http://schemas.microsoft.com/xaml/behaviors"
               xmlns:converters="clr-namespace:SquirrelCleaner.Converters"
               xmlns:orccontrols="http://schemas.wildgums.com/orc/controls"
               xmlns:orclogviewer="http://schemas.wildgums.com/orc/logviewer"
@@ -50,9 +50,9 @@
         <views:SummaryView DataContext="{Binding Channels}" />
 
         <TextBox Text="{Binding ChannelFilter}" Margin="0,4,0,4">
-            <i:Interaction.Behaviors>
+            <xamlbehaviors:Interaction.Behaviors>
                 <catel:UpdateBindingOnTextChanged />
-            </i:Interaction.Behaviors>
+            </xamlbehaviors:Interaction.Behaviors>
         </TextBox>
 
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding FilteredChannels}" AutoGenerateColumns="False"

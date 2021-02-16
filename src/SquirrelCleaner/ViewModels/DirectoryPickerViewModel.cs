@@ -92,14 +92,20 @@ namespace SquirrelCleaner.ViewModels
         /// </summary>
         private async Task OnSelectDirectoryExecuteAsync()
         {
+            var context = new DetermineDirectoryContext
+            {
+
+            };
+
             if (!string.IsNullOrEmpty(SelectedDirectory))
             {
-                _selectDirectoryService.InitialDirectory = Path.GetFullPath(SelectedDirectory);
+                context.InitialDirectory = Path.GetFullPath(SelectedDirectory);
             }
 
-            if (await _selectDirectoryService.DetermineDirectoryAsync())
+            var result = await _selectDirectoryService.DetermineDirectoryAsync(context);
+            if (result.Result)
             {
-                SelectedDirectory = _selectDirectoryService.DirectoryName;
+                SelectedDirectory = result.DirectoryName;
             }
         }
         #endregion

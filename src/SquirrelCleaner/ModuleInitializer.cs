@@ -14,7 +14,6 @@ public static class ModuleInitializer
         var serviceLocator = ServiceLocator.Default;
 
         serviceLocator.RegisterType<ICleanerService, CleanerService>();
-        serviceLocator.RegisterType<IApplicationInitializationService, ApplicationInitializationService>();
         serviceLocator.RegisterType<IChannelService, ChannelService>();
     }
 }
