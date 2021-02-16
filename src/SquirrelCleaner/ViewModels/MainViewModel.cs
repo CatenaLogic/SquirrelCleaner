@@ -131,7 +131,7 @@ namespace SquirrelCleaner.ViewModels
         #region Methods
         protected override async Task InitializeAsync()
         {
-            ChannelsRoot = _configurationService.GetRoamingValue<string>(Settings.Application.LastChannelsRoot);
+            ChannelsRoot = _configurationService.GetRoamingValue<string>(Settings.Application.General.LastChannelsRoot);
 
             await FindChannelsAsync();
         }
@@ -171,7 +171,7 @@ namespace SquirrelCleaner.ViewModels
                     Channels = null;
                 }
 
-                _configurationService.SetRoamingValue(Settings.Application.LastChannelsRoot, channelsRoot);
+                _configurationService.SetRoamingValue(Settings.Application.General.LastChannelsRoot, channelsRoot);
 
                 FilterChannels();
 

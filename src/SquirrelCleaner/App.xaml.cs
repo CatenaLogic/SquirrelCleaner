@@ -7,8 +7,11 @@
 
 namespace SquirrelCleaner
 {
+    using System;
     using System.Windows;
+    using System.Windows.Media;
     using Catel.Logging;
+    using Orc.Theming;
     using Orchestra;
 
     /// <summary>
@@ -31,8 +34,12 @@ namespace SquirrelCleaner
         {
             base.OnStartup(e);
 
+            FontImage.RegisterFont("FontAwesome", new FontFamily(new Uri("pack://application:,,,/SquirrelCleaner;component/Resources/Fonts/", UriKind.RelativeOrAbsolute), "./#FontAwesome"));
+            FontImage.DefaultFontFamily = "FontAwesome";
 
-            this.ApplyTheme();
+            // This shows the StyleHelper, but uses a *copy* of the Orchestra themes. The default margins for controls are not defined in
+            // Orc.Theming since it's a low-level library. The final default styles should be in the shell (thus Orchestra makes sense)
+            StyleHelper.CreateStyleForwardersForDefaultStyles();
         }
     }
 }
