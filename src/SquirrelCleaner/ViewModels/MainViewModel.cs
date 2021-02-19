@@ -149,6 +149,8 @@ namespace SquirrelCleaner.ViewModels
                 return;
             }
 
+            Log.Info("Start calculating cleanable releases");
+
             Progress = 0;
 
             using (CreateIsBusyScope())
@@ -188,6 +190,8 @@ namespace SquirrelCleaner.ViewModels
                     Progress = (int)percentage;
                 }
             }
+
+            Log.Info("Finished calculating cleanable releases");
 
             Progress = 100;
         }
