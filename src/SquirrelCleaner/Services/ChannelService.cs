@@ -65,6 +65,7 @@ namespace SquirrelCleaner.Services
                     var releasesFileLines = releaseFileContent.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                     var files = _directoryService.GetFiles(directory, "*.nupkg", SearchOption.TopDirectoryOnly);
+                    var releases = new List<Release>();
 
                     foreach (var file in files)
                     {
@@ -85,9 +86,9 @@ namespace SquirrelCleaner.Services
                                                                   where line.ContainsIgnoreCase(fullCheck)
                                                                   select line).FirstOrDefault();
 
-                                if (!channel.Releases.Contains(release))
+                                if (!releases.Contains(release))
                                 {
-                                    channel.Releases.Add(release);
+                                    releases.Add(release);
                                 }
                             }
                         }
@@ -96,6 +97,10 @@ namespace SquirrelCleaner.Services
                             Log.Warning(ex, $"Failed to process file '{file}'");
                         }
                     }
+
+                    channel.Releases.AddRange(from x in releases
+                                              orderby x.FileName
+                                              select x);
 
                     channel.LastStableRelease = (from release in channel.Releases
                                                  where !release.Version.IsPrerelease()

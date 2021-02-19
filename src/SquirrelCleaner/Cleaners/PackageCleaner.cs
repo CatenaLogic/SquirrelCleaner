@@ -10,8 +10,10 @@ namespace SquirrelCleaner.Cleaners
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using Catel.Logging;
+    using Humanizer;
     using Models;
     using Orc.FileSystem;
     using Path = Catel.IO.Path;
@@ -43,11 +45,14 @@ namespace SquirrelCleaner.Cleaners
 
             foreach (var releaseToPurge in releasesToPurge)
             {
+                var releaseSize = 0L;
+
                 var deltaPackageFileName = Path.Combine(channel.Directory, releaseToPurge.DeltaPackageFileName);
                 if (_fileService.Exists(deltaPackageFileName))
                 {
                     var fileInfo = new FileInfo(deltaPackageFileName);
                     size += fileInfo.Length;
+                    releaseSize += fileInfo.Length;
                 }
 
                 var fullPackageFileName = Path.Combine(channel.Directory, releaseToPurge.FullPackageFileName);
@@ -55,7 +60,10 @@ namespace SquirrelCleaner.Cleaners
                 {
                     var fileInfo = new FileInfo(fullPackageFileName);
                     size += fileInfo.Length;
+                    releaseSize += fileInfo.Length;
                 }
+
+                Log.Info($"Found release that can be purged: '{releaseToPurge}' ({releaseSize.Bytes().Humanize("#.#")})");
             }
 
             return size;

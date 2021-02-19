@@ -178,13 +178,15 @@ namespace SquirrelCleaner.ViewModels
                 var totalChannels = channels.Count;
                 var completedChannels = 0;
 
-                await channels.CalculateCleanableSpaceAsyncAndMultithreaded(() => _dispatcherService.BeginInvoke(() =>
+                foreach (var channel in channels.OrderBy(x => x.Name))
                 {
+                    await channel.CalculateCleanableSpaceAsync();
+
                     completedChannels++;
 
                     var percentage = ((double)completedChannels / totalChannels) * 100;
                     Progress = (int)percentage;
-                }));
+                }
             }
 
             Progress = 100;

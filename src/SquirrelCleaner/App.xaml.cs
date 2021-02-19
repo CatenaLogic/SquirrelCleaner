@@ -40,6 +40,7 @@ namespace SquirrelCleaner
             // This shows the StyleHelper, but uses a *copy* of the Orchestra themes. The default margins for controls are not defined in
             // Orc.Theming since it's a low-level library. The final default styles should be in the shell (thus Orchestra makes sense)
             StyleHelper.CreateStyleForwardersForDefaultStyles();
+            ThemeManager.Current.SynchronizeTheme();
         }
     }
 }
