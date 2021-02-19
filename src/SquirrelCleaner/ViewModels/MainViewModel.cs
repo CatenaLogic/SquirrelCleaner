@@ -19,6 +19,7 @@ namespace SquirrelCleaner.ViewModels
     using Catel.Reflection;
     using Catel.Services;
     using Catel.Threading;
+    using MethodTimer;
     using Models;
     using Services;
 
@@ -141,6 +142,7 @@ namespace SquirrelCleaner.ViewModels
             FilterChannels();
         }
 
+        [Time]
         private async Task FindChannelsAsync()
         {
             var channelsRoot = ChannelsRoot;

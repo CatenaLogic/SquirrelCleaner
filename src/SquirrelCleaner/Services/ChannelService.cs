@@ -99,7 +99,7 @@ namespace SquirrelCleaner.Services
                     }
 
                     channel.Releases.AddRange(from x in releases
-                                              orderby x.FileName
+                                              orderby x.Version
                                               select x);
 
                     channel.LastStableRelease = (from release in channel.Releases
