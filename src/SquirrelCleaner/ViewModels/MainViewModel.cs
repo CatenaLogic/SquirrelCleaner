@@ -110,7 +110,7 @@ namespace SquirrelCleaner.ViewModels
 
         private bool OnCleanUpCanExecute()
         {
-            if (Channels == null || Channels.Count == 0)
+            if (Channels is null || Channels.Count == 0)
             {
                 return false;
             }
@@ -232,7 +232,7 @@ namespace SquirrelCleaner.ViewModels
         private void FilterChannels()
         {
             var channels = Channels;
-            if (channels == null)
+            if (channels is null)
             {
                 using (FilteredChannels.SuspendChangeNotifications())
                 {

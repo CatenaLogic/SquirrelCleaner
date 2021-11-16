@@ -29,7 +29,7 @@ namespace SquirrelCleaner.Models
             Releases = new List<Release>();
             Cleaners = new List<ICleaner>();
 
-            if (cleaners != null)
+            if (cleaners is not null)
             {
                 Cleaners.AddRange(cleaners);
             }

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
     <AssemblyName>SquirrelCleaner</AssemblyName>
     <RootNamespace>SquirrelCleaner</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Catel.MVVM" Version="5.12.19" />
+    <PackageReference Include="Catel.MVVM" Version="5.12.20" />
     <PackageReference Include="Catel.Fody" Version="4.7.0" PrivateAssets="all" />
     <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="all">
       <IncludeAssets>build; native; contentfiles; analyzers</IncludeAssets>
@@ -41,6 +41,7 @@
     <PackageReference Include="Orc.Theming" Version="4.4.0" />
     <PackageReference Include="Orchestra.Core" Version="6.6.6" />
     <PackageReference Include="semver" Version="2.0.6" />
+    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

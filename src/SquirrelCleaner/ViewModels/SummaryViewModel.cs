@@ -53,7 +53,7 @@ namespace SquirrelCleaner.ViewModels
             _changeNotificationWrapper.CollectionChanged += OnChannelsChanged;
             _changeNotificationWrapper.CollectionItemPropertyChanged += OnChannelPropertyChanged;
 
-            await Update();
+            await UpdateAsync();
         }
 
         protected override async Task CloseAsync()
@@ -66,15 +66,15 @@ namespace SquirrelCleaner.ViewModels
 
         private async void OnChannelsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            await Update();
+            await UpdateAsync();
         }
 
         private async void OnChannelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            await Update();
+            await UpdateAsync();
         }
 
-        private async Task Update()
+        private async Task UpdateAsync()
         {
             if (IsBusy)
             {
@@ -106,7 +106,7 @@ namespace SquirrelCleaner.ViewModels
             if (_hasPendingUpdates)
             {
                 _hasPendingUpdates = false;
-                await Update();
+                await UpdateAsync();
             }
         }
 

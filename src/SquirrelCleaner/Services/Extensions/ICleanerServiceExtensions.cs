@@ -40,7 +40,7 @@ namespace SquirrelCleaner.Services
 
                 cleanedUpChannels.Add(channel);
 
-                if (completedCallback != null)
+                if (completedCallback is not null)
                 {
                     completedCallback();
                 }

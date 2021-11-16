@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
     <AssemblyName>SquirrelCleaner.Tests</AssemblyName>
     <RootNamespace>SquirrelCleaner.Tests</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -19,7 +19,7 @@
   
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.7.1" />
-    <PackageReference Include="Catel.Core" Version="5.12.19" />
+    <PackageReference Include="Catel.Core" Version="5.12.20" />
     <PackageReference Include="Catel.Fody" Version="4.7.0" PrivateAssets="all" />
     <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -32,6 +32,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
     <PackageReference Include="Orc.Csv" Version="4.3.2" />
     <PackageReference Include="PublicApiGenerator" Version="10.2.0" PrivateAssets="all" />
+    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

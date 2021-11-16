@@ -145,7 +145,7 @@ namespace SquirrelCleaner.Cleaners
             var releases = new List<Release>();
 
             var lastStableRelease = channel.LastStableRelease;
-            if (lastStableRelease != null)
+            if (lastStableRelease is not null)
             {
                 releases.AddRange(from release in channel.Releases
                                   where ShouldReleaseBePurged(release)

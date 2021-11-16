@@ -40,10 +40,10 @@ namespace SquirrelCleaner.ViewModels
         {
             await base.InitializeAsync();
 
-            await Update();
+            await UpdateAsync();
         }
 
-        private async Task Update()
+        private async Task UpdateAsync()
         {
             using (CreateIsBusyScope())
             {

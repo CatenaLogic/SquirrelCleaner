@@ -17,7 +17,7 @@ namespace SquirrelCleaner.Models
     {
         private const int MaxRunningthreads = 5;
 
-        public static async Task CalculateCleanableSpaceAsyncAndMultithreaded(this List<Channel> channels, Action completedCallback = null)
+        public static async Task CalculateCleanableSpaceAsyncAndMultithreadedAsync(this List<Channel> channels, Action completedCallback = null)
         {
             var itemsPerBatch = channels.Count / MaxRunningthreads;
 
@@ -27,7 +27,7 @@ namespace SquirrelCleaner.Models
                 {
                     await channel.CalculateCleanableSpaceAsync();
 
-                    if (completedCallback != null)
+                    if (completedCallback is not null)
                     {
                         completedCallback();
                     }

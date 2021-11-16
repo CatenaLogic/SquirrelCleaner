@@ -58,7 +58,7 @@ namespace SquirrelCleaner.Models
 
         public bool Equals(Release other)
         {
-            return other != null &&
+            return other is not null &&
                    EqualityComparer<SemVersion>.Default.Equals(Version, other.Version);
         }
 
