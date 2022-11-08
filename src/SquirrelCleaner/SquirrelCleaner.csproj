@@ -41,7 +41,7 @@
     <PackageReference Include="Orc.Theming" Version="4.6.0" />
     <PackageReference Include="Orchestra.Core" Version="6.8.1" />
     <PackageReference Include="semver" Version="2.2.0" />
-    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
+    <PackageReference Include="System.Security.Permissions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
