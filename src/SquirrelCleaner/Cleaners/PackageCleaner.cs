@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PackageCleaner.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Cleaners
+﻿namespace SquirrelCleaner.Cleaners
 {
     using System.Collections.Generic;
     using System.IO;
@@ -163,7 +156,7 @@ namespace SquirrelCleaner.Cleaners
             }
 
             // Note: we keep the unstable packages of the last stable release + any upcoming release
-            if (release.Version >= release.Channel.LastStableRelease)
+            if (release.Version.ComparePrecedenceTo(release.Channel.LastStableRelease) <= 0)
             {
                 return false;
             }

@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainViewModel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.ViewModels
+﻿namespace SquirrelCleaner.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -40,10 +33,10 @@ namespace SquirrelCleaner.ViewModels
         public MainViewModel(ICleanerService cleanerService, IDispatcherService dispatcherService,
             IConfigurationService configurationService, IChannelService channelService)
         {
-            Argument.IsNotNull(() => cleanerService);
-            Argument.IsNotNull(() => dispatcherService);
-            Argument.IsNotNull(() => configurationService);
-            Argument.IsNotNull(() => channelService);
+            ArgumentNullException.ThrowIfNull(cleanerService);
+            ArgumentNullException.ThrowIfNull(dispatcherService);
+            ArgumentNullException.ThrowIfNull(configurationService);
+            ArgumentNullException.ThrowIfNull(channelService);
 
             _cleanerService = cleanerService;
             _dispatcherService = dispatcherService;

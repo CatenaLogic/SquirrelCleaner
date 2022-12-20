@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CleanerBase.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Cleaners
+﻿namespace SquirrelCleaner.Cleaners
 {
     using System;
     using System.IO;
@@ -26,8 +19,8 @@ namespace SquirrelCleaner.Cleaners
 
         protected CleanerBase(IDirectoryService directoryService, IFileService fileService)
         {
-            Argument.IsNotNull(() => directoryService);
-            Argument.IsNotNull(() => fileService);
+            ArgumentNullException.ThrowIfNull(directoryService);
+            ArgumentNullException.ThrowIfNull(fileService);
 
             _directoryService = directoryService;
             _fileService = fileService;
@@ -50,7 +43,7 @@ namespace SquirrelCleaner.Cleaners
 
         public bool CanClean(Channel channel)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             Log.Debug("Checking if cleaner '{0}' can clean channel '{1}'", GetType(), channel);
 
@@ -63,7 +56,7 @@ namespace SquirrelCleaner.Cleaners
 
         public async Task<long> CalculateCleanableSpaceAsync(Channel channel)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             if (!CanClean(channel))
             {
@@ -81,7 +74,7 @@ namespace SquirrelCleaner.Cleaners
 
         public async Task CleanAsync(Channel channel, bool isFakeClean)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             if (!CanClean(channel))
             {
@@ -97,7 +90,7 @@ namespace SquirrelCleaner.Cleaners
 
         protected string GetRelativePath(Channel channel, string path)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             return Path.Combine(channel.Directory, path);
         }

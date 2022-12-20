@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainWindow.xaml.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Views
+﻿namespace SquirrelCleaner.Views
 {
     using System;
     using System.Windows;

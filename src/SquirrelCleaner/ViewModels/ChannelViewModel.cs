@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ChannelViewModel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.ViewModels
+﻿namespace SquirrelCleaner.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using Catel;
     using Catel.Fody;
@@ -21,8 +15,8 @@ namespace SquirrelCleaner.ViewModels
 
         public ChannelViewModel(Channel channel, ICleanerService cleanerService)
         {
-            Argument.IsNotNull(() => channel);
-            Argument.IsNotNull(() => cleanerService);
+            ArgumentNullException.ThrowIfNull(channel);
+            ArgumentNullException.ThrowIfNull(cleanerService);
 
             Channel = channel;
             _cleanerService = cleanerService;

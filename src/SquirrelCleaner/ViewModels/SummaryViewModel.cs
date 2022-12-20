@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SummaryViewModel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.ViewModels
+﻿namespace SquirrelCleaner.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -33,7 +26,7 @@ namespace SquirrelCleaner.ViewModels
 
         public SummaryViewModel(FastObservableCollection<Channel> channels)
         {
-            Argument.IsNotNull(() => channels);
+            ArgumentNullException.ThrowIfNull(channels);
 
             _channels = channels;
 

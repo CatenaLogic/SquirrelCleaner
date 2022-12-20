@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DirectoryPickerViewModel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.ViewModels
+﻿namespace SquirrelCleaner.ViewModels
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
     using Catel;
@@ -20,9 +14,9 @@ namespace SquirrelCleaner.ViewModels
         public DirectoryPickerViewModel(ISelectDirectoryService selectDirectoryService, IProcessService processService,
             IDirectoryService directoryService)
         {
-            Argument.IsNotNull(() => selectDirectoryService);
-            Argument.IsNotNull(() => processService);
-            Argument.IsNotNull(() => directoryService);
+            ArgumentNullException.ThrowIfNull(selectDirectoryService);
+            ArgumentNullException.ThrowIfNull(processService);
+            ArgumentNullException.ThrowIfNull(directoryService);
 
             _selectDirectoryService = selectDirectoryService;
             _processService = processService;

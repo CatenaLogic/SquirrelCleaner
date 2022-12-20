@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SizeToolTipViewModel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.ViewModels
+﻿namespace SquirrelCleaner.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +18,7 @@ namespace SquirrelCleaner.ViewModels
 
         public SizeToolTipViewModel(Channel channel)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             _channel = channel;
 

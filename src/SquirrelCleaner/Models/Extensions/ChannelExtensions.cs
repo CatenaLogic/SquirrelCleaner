@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ChannelExtensions.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Models
+﻿namespace SquirrelCleaner.Models
 {
     using System;
     using System.Collections.Generic;
@@ -37,7 +30,7 @@ namespace SquirrelCleaner.Models
 
         public static async Task<long> CalculateCleanableSpaceAsync(this Channel channel)
         {
-            Argument.IsNotNull(() => channel);
+            ArgumentNullException.ThrowIfNull(channel);
 
             if (!channel.CleanableSize.HasValue)
             {

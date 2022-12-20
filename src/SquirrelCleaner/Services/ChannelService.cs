@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ChannelService.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Services
+﻿namespace SquirrelCleaner.Services
 {
     using System;
     using System.Collections.Generic;
@@ -29,9 +22,9 @@ namespace SquirrelCleaner.Services
         public ChannelService(ICleanerService cleanerService, IDirectoryService directoryService,
             IFileService fileService)
         {
-            Argument.IsNotNull(() => cleanerService);
-            Argument.IsNotNull(() => directoryService);
-            Argument.IsNotNull(() => fileService);
+            ArgumentNullException.ThrowIfNull(cleanerService);
+            ArgumentNullException.ThrowIfNull(directoryService);
+            ArgumentNullException.ThrowIfNull(fileService);
 
             _cleanerService = cleanerService;
             _directoryService = directoryService;

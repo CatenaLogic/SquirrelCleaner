@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SemVersionExtensions.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner
+﻿namespace SquirrelCleaner
 {
+    using System;
     using Catel;
     using Semver;
 
@@ -14,7 +8,7 @@ namespace SquirrelCleaner
     {
         public static bool IsPrerelease(this SemVersion version)
         {
-            Argument.IsNotNull(() => version);
+            ArgumentNullException.ThrowIfNull(version);
 
             if (!string.IsNullOrWhiteSpace(version.Prerelease))
             {

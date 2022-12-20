@@ -1,20 +1,10 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICleanerServiceExtensions.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Services
+﻿namespace SquirrelCleaner.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Catel;
-    using Catel.Data;
     using Catel.Logging;
-    using Catel.Threading;
     using Models;
 
     internal static class ICleanerServiceExtensions
@@ -23,7 +13,7 @@ namespace SquirrelCleaner.Services
 
         public static async Task CleanAsync(this ICleanerService cleanerService, IEnumerable<Channel> channels, bool isFakeClean, Action completedCallback = null)
         {
-            Argument.IsNotNull(nameof(cleanerService), cleanerService);
+            ArgumentNullException.ThrowIfNull(cleanerService);
 
             var cleanedUpChannels = new List<Channel>();
 

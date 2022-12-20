@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RichTextBoxLogListener.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2015 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Logging
+﻿namespace SquirrelCleaner.Logging
 {
     using System;
     using System.Collections.Generic;
@@ -37,7 +30,7 @@ namespace SquirrelCleaner.Logging
 
         public RichTextBoxLogListener(RichTextBox richTextBox)
         {
-            Argument.IsNotNull(() => richTextBox);
+            ArgumentNullException.ThrowIfNull(richTextBox);
 
             IgnoreCatelLogging = true;
             IsDebugEnabled = false;

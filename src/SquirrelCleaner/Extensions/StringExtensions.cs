@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StringExtensions.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner
+﻿namespace SquirrelCleaner
 {
+    using System;
     using System.IO;
     using Catel;
     using Semver;
@@ -15,7 +9,7 @@ namespace SquirrelCleaner
     {
         public static SemVersion ExtractVersionFromFileName(this string fileName)
         {
-            Argument.IsNotNull(() => fileName);
+            ArgumentNullException.ThrowIfNull(fileName);
 
             var fileInfo = new FileInfo(fileName);
             var versionString = fileInfo.Name
@@ -31,7 +25,7 @@ namespace SquirrelCleaner
 
             versionString = versionString.Substring(dashIndex + 1);
 
-            var version = SemVersion.Parse(versionString, false);
+            var version = SemVersion.Parse(versionString, SemVersionStyles.Any);
             return version;
         }
     }

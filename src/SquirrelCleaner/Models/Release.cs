@@ -1,11 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Release.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Models
+﻿namespace SquirrelCleaner.Models
 {
     using Catel;
     using Semver;
@@ -17,9 +10,9 @@ namespace SquirrelCleaner.Models
     {
         public Release(Channel channel, string fileName, SemVersion version)
         {
-            Argument.IsNotNull(() => channel);
-            Argument.IsNotNull(() => fileName);
-            Argument.IsNotNull(() => version);
+            ArgumentNullException.ThrowIfNull(channel);
+            ArgumentNullException.ThrowIfNull(fileName);
+            ArgumentNullException.ThrowIfNull(version);
 
             Channel = channel;
             FileName = fileName;

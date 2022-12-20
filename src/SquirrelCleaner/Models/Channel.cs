@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Channel.cs" company="CatenaLogic">
-//   Copyright (c) 2014 - 2018 CatenaLogic. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace SquirrelCleaner.Models
+﻿namespace SquirrelCleaner.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using Catel;
@@ -18,7 +12,7 @@ namespace SquirrelCleaner.Models
     {
         public Channel(string directory, IEnumerable<ICleaner> cleaners)
         {
-            Argument.IsNotNull(() => directory);
+            ArgumentNullException.ThrowIfNull(directory);
 
             var directoryInfo = new DirectoryInfo(directory);
 
