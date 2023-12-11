@@ -1,7 +1,6 @@
 ﻿namespace SquirrelCleaner
 {
     using System;
-    using Catel;
     using Semver;
 
     public static class SemVersionExtensions

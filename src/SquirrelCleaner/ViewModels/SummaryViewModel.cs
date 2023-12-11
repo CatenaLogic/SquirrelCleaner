@@ -1,7 +1,6 @@
 ﻿namespace SquirrelCleaner.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
@@ -11,9 +10,7 @@
     using Catel.Data;
     using Catel.Logging;
     using Catel.MVVM;
-    using Catel.Services;
     using Models;
-    using Services;
 
     internal class SummaryViewModel : ViewModelBase
     {

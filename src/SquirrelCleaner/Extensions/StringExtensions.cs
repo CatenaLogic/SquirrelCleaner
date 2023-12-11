@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using Catel;
     using Semver;
 
     public static class StringExtensions

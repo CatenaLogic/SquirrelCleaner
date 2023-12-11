@@ -5,7 +5,6 @@
     using System.Windows.Media;
     using Catel.Logging;
     using Orc.Theming;
-    using Orchestra;
 
     /// <summary>
     /// Interaction logic for App.xaml

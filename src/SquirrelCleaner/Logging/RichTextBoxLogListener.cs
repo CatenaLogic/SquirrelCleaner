@@ -6,7 +6,6 @@
     using System.Windows.Controls;
     using System.Windows.Documents;
     using System.Windows.Media;
-    using Catel;
     using Catel.Logging;
 
     public class RichTextBoxLogListener : LogListenerBase

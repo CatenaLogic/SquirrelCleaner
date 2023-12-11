@@ -3,13 +3,11 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using Catel.Logging;
     using Humanizer;
     using Models;
     using Orc.FileSystem;
-    using Path = Catel.IO.Path;
 
     public class PackageCleaner : CleanerBase
     {

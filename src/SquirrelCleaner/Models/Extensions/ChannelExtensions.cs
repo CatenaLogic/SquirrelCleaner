@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Catel;
-    using Catel.Threading;
 
     public static class ChannelExtensions
     {
@@ -16,7 +14,7 @@
 
             foreach (var channel in channels)
             {
-                await TaskShim.Run(async () =>
+                await Task.Run(async () =>
                 {
                     await channel.CalculateCleanableSpaceAsync();
 

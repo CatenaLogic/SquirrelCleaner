@@ -2,10 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Catel;
     using Catel.Fody;
     using Catel.MVVM;
-    using Catel.Threading;
     using Models;
     using Services;
 
@@ -38,7 +36,7 @@
             _cleanerService.ChannelCleaning += OnCleanerServiceChannelCleaning;
             _cleanerService.ChannelCleaned += OnCleanerServiceChannelCleaned;
 
-            CleanableSpace = await TaskShim.Run(() => Channel.CalculateCleanableSpaceAsync());
+            CleanableSpace = await Task.Run(() => Channel.CalculateCleanableSpaceAsync());
         }
 
         protected override async Task CloseAsync()

@@ -11,7 +11,6 @@
     using Catel.MVVM;
     using Catel.Reflection;
     using Catel.Services;
-    using Catel.Threading;
     using MethodTimer;
     using Models;
     using Services;
@@ -152,7 +151,7 @@
             {
                 var channels = new List<Channel>();
 
-                await TaskHelper.Run(async () => { channels.AddRange(await _channelService.FindChannelsAsync(channelsRoot)); });
+                await Task.Run(async () => { channels.AddRange(await _channelService.FindChannelsAsync(channelsRoot)); });
 
                 if (channels.Count > 0)
                 {

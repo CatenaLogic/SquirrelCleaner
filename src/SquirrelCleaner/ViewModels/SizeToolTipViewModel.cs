@@ -1,14 +1,10 @@
 ﻿namespace SquirrelCleaner.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
     using System.Threading.Tasks;
     using Catel;
     using Catel.MVVM;
-    using Catel.Text;
-    using Cleaners;
     using Humanizer;
     using Models;
 

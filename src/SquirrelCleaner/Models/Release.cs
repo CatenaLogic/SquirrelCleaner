@@ -1,6 +1,5 @@
 ﻿namespace SquirrelCleaner.Models
 {
-    using Catel;
     using Semver;
     using System;
     using System.Collections.Generic;

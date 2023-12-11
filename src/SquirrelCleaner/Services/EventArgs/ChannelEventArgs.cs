@@ -1,7 +1,6 @@
 ﻿namespace SquirrelCleaner.Services
 {
     using System;
-    using Catel;
     using Models;
 
     internal class ChannelEventArgs : EventArgs
