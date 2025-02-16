@@ -10,6 +10,7 @@
     using MethodTimer;
     using Models;
     using Orc.FileSystem;
+    using Semver;
 
     internal class ChannelService : IChannelService
     {
@@ -91,14 +92,12 @@
                         }
                     }
 
-                    channel.Releases.AddRange(from x in releases
-                                              orderby x.Version
-                                              select x);
+                    channel.Releases.AddRange(releases.OrderBy(x => x.Version, SemVersion.SortOrderComparer));
 
-                    channel.LastStableRelease = (from release in channel.Releases
-                                                 where !release.Version.IsPrerelease()
-                                                 orderby release.Version descending
-                                                 select release.Version).FirstOrDefault();
+                    channel.LastStableRelease = channel.Releases
+                                                    .Where(x => !x.Version.IsPrerelease())
+                                                    .OrderByDescending(x => x.Version, SemVersion.SortOrderComparer)
+                                                    .Select(x => x.Version).FirstOrDefault();
 
                     Log.Debug($"Found channel '{channel}' with '{channel.Releases.Count}' releases, last stable release '{channel.LastStableRelease}'");
 
