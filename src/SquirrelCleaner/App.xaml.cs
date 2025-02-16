@@ -1,8 +1,11 @@
 ﻿namespace SquirrelCleaner
 {
     using System;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Media;
+    using Catel.Configuration;
+    using Catel.IoC;
     using Catel.Logging;
     using Orc.Theming;
 
@@ -22,12 +25,15 @@
         /// Raises the <see cref="E:System.Windows.Application.Startup"/> event.
         /// </summary>
         /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             FontImage.RegisterFont("FontAwesome", new FontFamily(new Uri("pack://application:,,,/SquirrelCleaner;component/Resources/Fonts/", UriKind.RelativeOrAbsolute), "./#FontAwesome"));
             FontImage.DefaultFontFamily = "FontAwesome";
+
+            var configurationService = ServiceLocator.Default.ResolveRequiredType<IConfigurationService>();
+            await configurationService.LoadAsync();
 
             // This shows the StyleHelper, but uses a *copy* of the Orchestra themes. The default margins for controls are not defined in
             // Orc.Theming since it's a low-level library. The final default styles should be in the shell (thus Orchestra makes sense)
