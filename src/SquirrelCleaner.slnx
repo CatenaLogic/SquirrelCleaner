@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/misc/">
+    <File Path="nuget.config" />
+    <File Path="SolutionAssemblyInfo.cs" />
+    <File Path="SquirrelCleaner.sln.DotSettings" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Core/">
+    <Project Path="SquirrelCleaner/SquirrelCleaner.csproj" />
+  </Folder>
+  <Folder Name="/src/Tests/">
+    <Project Path="SquirrelCleaner.Tests/SquirrelCleaner.Tests.csproj" />
+  </Folder>
+  <Properties Name="Performance">
+    <Property Name="HasPerformanceSessions" Value="true" />
+  </Properties>
+</Solution>
