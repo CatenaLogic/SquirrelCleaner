@@ -34,7 +34,7 @@
     <PackageReference Include="LoadAssembliesOnStartup.Fody" Version="4.7.0" PrivateAssets="all" />
     <PackageReference Include="MethodTimer.Fody" Version="3.2.3" PrivateAssets="all" />
     <PackageReference Include="Orc.CommandLine" Version="5.0.0" />
-    <PackageReference Include="Orc.Controls" Version="5.4.1" />
+    <PackageReference Include="Orc.Controls" Version="6.0.0" />
     <PackageReference Include="Orc.LogViewer" Version="5.2.0" />
     <PackageReference Include="Orc.Notifications" Version="5.2.0" />
     <PackageReference Include="Orc.Theming" Version="5.4.0" />
