@@ -1,6 +1,7 @@
 ﻿namespace SquirrelCleaner.Views
 {
     using System.Windows;
+    using Catel;
     using Catel.MVVM.Views;
 
     /// <summary>
@@ -8,18 +9,12 @@
     /// </summary>
     public partial class DirectoryPickerView
     {
-        static DirectoryPickerView()
-        {
-            typeof (DirectoryPickerView).AutoDetectViewPropertiesToSubscribe();
-        }
+        [InjectedService]
+        private readonly IViewPropertySelector _viewPropertySelector;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DirectoryPickerView"/> class.
-        /// </summary>
-        /// <remarks>This method is required for design time support.</remarks>
-        public DirectoryPickerView()
+        partial void OnInitializedComponent()
         {
-            InitializeComponent();
+            typeof(DirectoryPickerView).AutoDetectViewPropertiesToSubscribe(_viewPropertySelector);
         }
 
         #region Properties

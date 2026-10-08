@@ -6,10 +6,11 @@
     using System.Threading.Tasks;
     using Catel.Logging;
     using Models;
+    using Microsoft.Extensions.Logging;
 
     internal static class ICleanerServiceExtensions
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = LogManager.GetLogger(typeof(ICleanerServiceExtensions));
 
         public static async Task CleanAsync(this ICleanerService cleanerService, IEnumerable<Channel> channels, bool isFakeClean, Action completedCallback = null)
         {
@@ -21,7 +22,7 @@
                                      where channel.IsIncluded
                                      select channel).ToList();
 
-            Log.Info("Cleaning up '{0}' channels", channelsToCleanUp.Count);
+            Logger.LogInformation("Cleaning up {ChannelCount} channels", channelsToCleanUp.Count);
 
             foreach (var channel in channelsToCleanUp)
             {
@@ -36,7 +37,7 @@
                 }
             }
 
-            Log.Info("Cleaned up '{0}' channels", cleanedUpChannels.Count);
+            Logger.LogInformation("Cleaned up {ChannelCount} channels", cleanedUpChannels.Count);
         }
     }
 }

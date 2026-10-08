@@ -3,15 +3,25 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Catel;
     using Catel.MVVM;
     using Catel.Services;
     using Orc.FileSystem;
 
-    public class DirectoryPickerViewModel : ViewModelBase
+    public partial class DirectoryPickerViewModel : ViewModelBase
     {
-        #region Constructors
-        public DirectoryPickerViewModel(ISelectDirectoryService selectDirectoryService, IProcessService processService,
-            IDirectoryService directoryService)
+        #region Fields
+        private readonly IProcessService _processService;
+
+        private readonly IDirectoryService _directoryService;
+
+        private readonly ISelectDirectoryService _selectDirectoryService;
+
+        #endregion
+
+        public DirectoryPickerViewModel(IServiceProvider serviceProvider, ISelectDirectoryService selectDirectoryService,
+            IProcessService processService, IDirectoryService directoryService)
+            : base(serviceProvider)
         {
             ArgumentNullException.ThrowIfNull(selectDirectoryService);
             ArgumentNullException.ThrowIfNull(processService);
@@ -21,16 +31,9 @@
             _processService = processService;
             _directoryService = directoryService;
 
-            OpenDirectory = new Command(OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
-            SelectDirectory = new TaskCommand(OnSelectDirectoryExecuteAsync);
+            OpenDirectory = new Command(serviceProvider, OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
+            SelectDirectory = new TaskCommand(serviceProvider, OnSelectDirectoryExecuteAsync);
         }
-        #endregion
-
-        #region Fields
-        private readonly IProcessService _processService;
-        private readonly IDirectoryService _directoryService;
-        private readonly ISelectDirectoryService _selectDirectoryService;
-        #endregion
 
         #region Properties
         public double LabelWidth { get; set; }

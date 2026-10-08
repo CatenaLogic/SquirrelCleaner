@@ -3,14 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Catel.Logging;
     using Cleaners;
     using MethodTimer;
     using Models;
+    using Microsoft.Extensions.Logging;
 
     internal class CleanerService : InterfaceFinderServiceBase<ICleaner>, ICleanerService
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILogger<CleanerService> _logger;
+
+        public CleanerService(IEnumerable<ICleaner> cleaners, ILogger<CleanerService> logger)
+            : base(cleaners)
+        {
+            ArgumentNullException.ThrowIfNull(logger);
+
+            _logger = logger;
+        }
 
         public event EventHandler<ChannelEventArgs> ChannelCleaning;
         public event EventHandler<ChannelEventArgs> ChannelCleaned;
@@ -25,8 +33,8 @@
         {
             var canClean = false;
 
-            Log.Debug("Checking if channel '{0}' can be cleaned", channel);
-            Log.Indent();
+            using var scope = _logger.BeginScope("Checking if channel {Channel} can be cleaned", channel);
+            _logger.LogDebug("Checking if channel {Channel} can be cleaned", channel);
 
             var cleaners = GetAvailableCleaners();
 
@@ -34,12 +42,12 @@
             {
                 foreach (var cleaner in cleaners)
                 {
-                    Log.Debug("Checking if channel '{0}' can be cleaned by cleaner '{1}'", channel, cleaner);
+                    _logger.LogDebug("Checking if channel {Channel} can be cleaned by cleaner {Cleaner}", channel, cleaner);
 
 
                     if (cleaner.CanClean(channel))
                     {
-                        Log.Debug("Channel '{0}' can be cleaned by cleaner '{1}'", channel, cleaner);
+                        _logger.LogDebug("Channel {Channel} can be cleaned by cleaner {Cleaner}", channel, cleaner);
 
                         canClean = true;
                         break;
@@ -47,8 +55,7 @@
                 }
             });
 
-            Log.Unindent();
-            Log.Debug("Checked if channel '{0}' can be cleaned, result = {1}", channel, canClean);
+            _logger.LogDebug("Checked if channel {Channel} can be cleaned, result = {CanClean}", channel, canClean);
 
             return canClean;
         }
@@ -58,8 +65,8 @@
         {
             ChannelCleaning?.Invoke(this, new ChannelEventArgs(channel));
 
-            Log.Info("Cleaning channel '{0}'", channel);
-            Log.Indent();
+            using var scope = _logger.BeginScope("Cleaning channel {Channel}", channel);
+            _logger.LogInformation("Cleaning channel {Channel}", channel);
 
             await Task.Run(() =>
             {
@@ -68,17 +75,16 @@
                 {
                     if (cleaner.CanClean(channel))
                     {
-                        Log.Debug("Cleaning channel '{0}' using cleaner '{1}'", channel, cleaner);
+                        _logger.LogDebug("Cleaning channel {Channel} using cleaner {Cleaner}", channel, cleaner);
 
                         cleaner.CleanAsync(channel, isFakeClean);
 
-                        Log.Debug("Cleaned channel '{0}' using cleaner '{1}'", channel, cleaner);
+                        _logger.LogDebug("Cleaned channel {Channel} using cleaner {Cleaner}", channel, cleaner);
                     }
                 }
             });
 
-            Log.Unindent();
-            Log.Info("Cleaned channel '{0}'", channel);
+            _logger.LogInformation("Cleaned channel {Channel}", channel);
 
             ChannelCleaned?.Invoke(this, new ChannelEventArgs(channel));
         }

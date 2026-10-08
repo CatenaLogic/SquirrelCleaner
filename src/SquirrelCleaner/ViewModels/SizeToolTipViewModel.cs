@@ -8,16 +8,16 @@
     using Humanizer;
     using Models;
 
-    internal class SizeToolTipViewModel : ViewModelBase
+    internal partial class SizeToolTipViewModel : ViewModelBase
     {
         private readonly Channel _channel;
 
-        public SizeToolTipViewModel(Channel channel)
+        public SizeToolTipViewModel(Channel channel, IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             ArgumentNullException.ThrowIfNull(channel);
 
             _channel = channel;
-
             Items = new ObservableCollection<string>();
         }
 

@@ -7,47 +7,53 @@
     using Catel;
     using Catel.Collections;
     using Catel.Configuration;
-    using Catel.Logging;
     using Catel.MVVM;
     using Catel.Reflection;
     using Catel.Services;
     using MethodTimer;
+    using Microsoft.Extensions.Logging;
     using Models;
     using Services;
 
-    internal class MainViewModel : ViewModelBase
+    internal partial class MainViewModel : ViewModelBase
     {
         #region Constants
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILogger<MainViewModel> _logger;
         #endregion
 
         #region Fields
         private readonly ICleanerService _cleanerService;
+
         private readonly IDispatcherService _dispatcherService;
+
         private readonly IConfigurationService _configurationService;
+
         private readonly IChannelService _channelService;
         #endregion
 
         #region Constructors
-        public MainViewModel(ICleanerService cleanerService, IDispatcherService dispatcherService,
-            IConfigurationService configurationService, IChannelService channelService)
+        public MainViewModel(IServiceProvider serviceProvider, ILogger<MainViewModel> logger, ICleanerService cleanerService,
+            IDispatcherService dispatcherService, IConfigurationService configurationService, IChannelService channelService)
+            : base(serviceProvider)
         {
+            ArgumentNullException.ThrowIfNull(logger);
             ArgumentNullException.ThrowIfNull(cleanerService);
             ArgumentNullException.ThrowIfNull(dispatcherService);
             ArgumentNullException.ThrowIfNull(configurationService);
             ArgumentNullException.ThrowIfNull(channelService);
 
+            _logger = logger;
             _cleanerService = cleanerService;
             _dispatcherService = dispatcherService;
             _configurationService = configurationService;
             _channelService = channelService;
 
-            Channels = new FastObservableCollection<Channel>();
-            FilteredChannels = new FastObservableCollection<Channel>();
+            Channels = new FastObservableCollection<Channel>(_dispatcherService);
+            FilteredChannels = new FastObservableCollection<Channel>(_dispatcherService);
 
-            Analyze = new Command(OnAnalyzeExecute, OnAnalyzeCanExecute);
-            FakeCleanUp = new Command(OnFakeCleanUpExecute, OnCleanUpCanExecute);
-            CleanUp = new Command(OnCleanUpExecute, OnCleanUpCanExecute);
+            Analyze = new Command(ServiceProvider, OnAnalyzeExecute, OnAnalyzeCanExecute);
+            FakeCleanUp = new Command(ServiceProvider, OnFakeCleanUpExecute, OnCleanUpCanExecute);
+            CleanUp = new Command(ServiceProvider, OnCleanUpExecute, OnCleanUpCanExecute);
 
             var entryAssembly = AssemblyHelper.GetEntryAssembly();
             Title = string.Format("{0} - v{1}", entryAssembly.Title(), entryAssembly.InformationalVersion());
@@ -143,7 +149,7 @@
                 return;
             }
 
-            Log.Info("Start calculating cleanable releases");
+            _logger.LogInformation("Start calculating cleanable releases");
 
             Progress = 0;
 
@@ -185,7 +191,7 @@
                 }
             }
 
-            Log.Info("Finished calculating cleanable releases");
+            _logger.LogInformation("Finished calculating cleanable releases");
 
             Progress = 100;
         }
