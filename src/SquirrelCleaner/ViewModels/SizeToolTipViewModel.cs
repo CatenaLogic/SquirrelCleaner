@@ -10,11 +10,14 @@
 
     internal partial class SizeToolTipViewModel : ViewModelBase
     {
-        [InjectedModel]
         private readonly Channel _channel;
 
-        partial void OnConstructed()
+        public SizeToolTipViewModel(Channel channel, IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
+            ArgumentNullException.ThrowIfNull(channel);
+
+            _channel = channel;
             Items = new ObservableCollection<string>();
         }
 

@@ -11,16 +11,29 @@
     public partial class DirectoryPickerViewModel : ViewModelBase
     {
         #region Fields
-        [InjectedService]
         private readonly IProcessService _processService;
 
-        [InjectedService]
         private readonly IDirectoryService _directoryService;
 
-        [InjectedService]
         private readonly ISelectDirectoryService _selectDirectoryService;
 
         #endregion
+
+        public DirectoryPickerViewModel(IServiceProvider serviceProvider, ISelectDirectoryService selectDirectoryService,
+            IProcessService processService, IDirectoryService directoryService)
+            : base(serviceProvider)
+        {
+            ArgumentNullException.ThrowIfNull(selectDirectoryService);
+            ArgumentNullException.ThrowIfNull(processService);
+            ArgumentNullException.ThrowIfNull(directoryService);
+
+            _selectDirectoryService = selectDirectoryService;
+            _processService = processService;
+            _directoryService = directoryService;
+
+            OpenDirectory = new Command(serviceProvider, OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
+            SelectDirectory = new TaskCommand(serviceProvider, OnSelectDirectoryExecuteAsync);
+        }
 
         #region Properties
         public double LabelWidth { get; set; }
@@ -69,12 +82,6 @@
         /// Gets the SelectDirectory command.
         /// </summary>
         public TaskCommand SelectDirectory { get; private set; }
-
-        partial void OnConstructed()
-        {
-            OpenDirectory = new Command(ServiceProvider, OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
-            SelectDirectory = new TaskCommand(ServiceProvider, OnSelectDirectoryExecuteAsync);
-        }
 
         /// <summary>
         /// Method to invoke when the SelectOutputDirectory command is executed.

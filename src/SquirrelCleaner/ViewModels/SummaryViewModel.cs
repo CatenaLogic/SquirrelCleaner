@@ -13,14 +13,17 @@
 
     internal partial class SummaryViewModel : ViewModelBase
     {
-        [InjectedModel]
         private readonly FastObservableCollection<Channel> _channels;
 
         private ChangeNotificationWrapper _changeNotificationWrapper;
         private bool _hasPendingUpdates;
 
-        partial void OnConstructed()
+        public SummaryViewModel(FastObservableCollection<Channel> channels, IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
+            ArgumentNullException.ThrowIfNull(channels);
+
+            _channels = channels;
             _changeNotificationWrapper = new ChangeNotificationWrapper(_channels);
         }
 

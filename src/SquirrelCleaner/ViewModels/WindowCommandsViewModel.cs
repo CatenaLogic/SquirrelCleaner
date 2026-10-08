@@ -10,14 +10,20 @@
 
     public partial class WindowCommandsViewModel : ViewModelBase
     {
-        [InjectedService]
         private readonly IBaseColorSchemeService _baseColorSchemeService;
 
-        [InjectedService]
         private readonly IConfigurationService _configurationService;
 
-        partial void OnConstructed()
+        public WindowCommandsViewModel(IServiceProvider serviceProvider, IBaseColorSchemeService baseColorSchemeService,
+            IConfigurationService configurationService)
+            : base(serviceProvider)
         {
+            ArgumentNullException.ThrowIfNull(baseColorSchemeService);
+            ArgumentNullException.ThrowIfNull(configurationService);
+
+            _baseColorSchemeService = baseColorSchemeService;
+            _configurationService = configurationService;
+
             SwitchTheme = new Command(ServiceProvider, OnSwitchThemeExecute);
         }
 

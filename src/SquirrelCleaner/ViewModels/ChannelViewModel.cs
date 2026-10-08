@@ -10,16 +10,24 @@
 
     internal partial class ChannelViewModel : FeaturedViewModelBase
     {
-        [InjectedService]
         private readonly ICleanerService _cleanerService;
 
-        [InjectedModel]
         [Model(SupportIEditableObject = false)]
         [Expose("Name")]
         [Expose("Product")]
         [Expose("Directory")]
         [Expose("IsIncluded")]
         public Channel Channel { get; private set; }
+
+        public ChannelViewModel(Channel channel, IServiceProvider serviceProvider, ICleanerService cleanerService)
+            : base(serviceProvider)
+        {
+            ArgumentNullException.ThrowIfNull(channel);
+            ArgumentNullException.ThrowIfNull(cleanerService);
+
+            Channel = channel;
+            _cleanerService = cleanerService;
+        }
 
         public long CleanableSpace { get; private set; }
 

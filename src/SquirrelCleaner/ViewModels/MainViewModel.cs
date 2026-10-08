@@ -18,27 +18,36 @@
     internal partial class MainViewModel : ViewModelBase
     {
         #region Constants
-        [InjectedService]
         private readonly ILogger<MainViewModel> _logger;
         #endregion
 
         #region Fields
-        [InjectedService]
         private readonly ICleanerService _cleanerService;
 
-        [InjectedService]
         private readonly IDispatcherService _dispatcherService;
 
-        [InjectedService]
         private readonly IConfigurationService _configurationService;
 
-        [InjectedService]
         private readonly IChannelService _channelService;
         #endregion
 
         #region Constructors
-        partial void OnConstructed()
+        public MainViewModel(IServiceProvider serviceProvider, ILogger<MainViewModel> logger, ICleanerService cleanerService,
+            IDispatcherService dispatcherService, IConfigurationService configurationService, IChannelService channelService)
+            : base(serviceProvider)
         {
+            ArgumentNullException.ThrowIfNull(logger);
+            ArgumentNullException.ThrowIfNull(cleanerService);
+            ArgumentNullException.ThrowIfNull(dispatcherService);
+            ArgumentNullException.ThrowIfNull(configurationService);
+            ArgumentNullException.ThrowIfNull(channelService);
+
+            _logger = logger;
+            _cleanerService = cleanerService;
+            _dispatcherService = dispatcherService;
+            _configurationService = configurationService;
+            _channelService = channelService;
+
             Channels = new FastObservableCollection<Channel>(_dispatcherService);
             FilteredChannels = new FastObservableCollection<Channel>(_dispatcherService);
 
