@@ -4,25 +4,27 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using Catel.Logging;
     using Catel.Reflection;
     using Models;
+    using Microsoft.Extensions.Logging;
     using Orc.FileSystem;
 
     public abstract class CleanerBase : ICleaner
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        protected readonly ILogger Logger;
 
         protected readonly IDirectoryService _directoryService;
         protected readonly IFileService _fileService;
 
-        protected CleanerBase(IDirectoryService directoryService, IFileService fileService)
+        protected CleanerBase(IDirectoryService directoryService, IFileService fileService, ILogger logger)
         {
             ArgumentNullException.ThrowIfNull(directoryService);
             ArgumentNullException.ThrowIfNull(fileService);
+            ArgumentNullException.ThrowIfNull(logger);
 
             _directoryService = directoryService;
             _fileService = fileService;
+            Logger = logger;
 
             if (GetType().TryGetAttribute(out CleanerAttribute cleanerAttribute))
             {
@@ -44,11 +46,11 @@
         {
             ArgumentNullException.ThrowIfNull(channel);
 
-            Log.Debug("Checking if cleaner '{0}' can clean channel '{1}'", GetType(), channel);
+            Logger.LogDebug("Checking if cleaner {CleanerType} can clean channel {Channel}", GetType(), channel);
 
             var canClean = CanCleanChannel(channel);
 
-            Log.Debug("Cleaner '{0}' can clean channel '{1}': {2}", GetType(), channel, canClean);
+            Logger.LogDebug("Cleaner {CleanerType} can clean channel {Channel}: {CanClean}", GetType(), channel, canClean);
 
             return canClean;
         }
@@ -62,11 +64,11 @@
                 return 0L;
             }
 
-            Log.Debug("Calculating cleanable space using cleaner '{0}' and channel '{1}'", GetType(), channel);
+            Logger.LogDebug("Calculating cleanable space using cleaner {CleanerType} and channel {Channel}", GetType(), channel);
 
             var cleanableSpace = CalculateCleanableSpaceForChannel(channel);
 
-            Log.Debug("Calculated cleanable space using cleaner '{0}' and channel '{1}': {2}", GetType(), channel, cleanableSpace);
+            Logger.LogDebug("Calculated cleanable space using cleaner {CleanerType} and channel {Channel}: {CleanableSpace}", GetType(), channel, cleanableSpace);
 
             return cleanableSpace;
         }
@@ -80,11 +82,11 @@
                 return;
             }
 
-            Log.Info("Cleaning up channel '{0}' using cleaner '{1}'", channel, GetType());
+            Logger.LogInformation("Cleaning up channel {Channel} using cleaner {CleanerType}", channel, GetType());
 
             await CleanChannelAsync(channel, isFakeClean);
 
-            Log.Info("Cleaned up channel '{0}' using cleaner '{1}'", channel, GetType());
+            Logger.LogInformation("Cleaned up channel {Channel} using cleaner {CleanerType}", channel, GetType());
         }
 
         protected string GetRelativePath(Channel channel, string path)
@@ -101,7 +103,7 @@
                 return;
             }
 
-            Log.Debug("Deleting directory '{0}'", directory);
+            Logger.LogDebug("Deleting directory {Directory}", directory);
 
             if (!isFakeClean)
             {
@@ -111,7 +113,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Log.Warning(ex, "Failed to delete directory '{0}'", directory);
+                    Logger.LogWarning(ex, "Failed to delete directory {Directory}", directory);
                 }
             }
         }
@@ -130,7 +132,7 @@
             }
             catch (Exception ex)
             {
-                Log.Warning(ex, "Failed to calculate the cleanable space for directory '{0}'", directory);
+                Logger.LogWarning(ex, "Failed to calculate the cleanable space for directory {Directory}", directory);
             }
 
             return size;

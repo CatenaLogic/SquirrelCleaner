@@ -3,24 +3,22 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Catel;
     using Catel.Configuration;
     using Catel.MVVM;
     using Orc.Theming;
 
-    public class WindowCommandsViewModel : ViewModelBase
+    public partial class WindowCommandsViewModel : ViewModelBase
     {
+        [InjectedService]
         private readonly IBaseColorSchemeService _baseColorSchemeService;
+
+        [InjectedService]
         private readonly IConfigurationService _configurationService;
 
-        public WindowCommandsViewModel(IBaseColorSchemeService baseColorSchemeService, IConfigurationService configurationService)
+        partial void OnConstructed()
         {
-            ArgumentNullException.ThrowIfNull(baseColorSchemeService);
-            ArgumentNullException.ThrowIfNull(configurationService);
-
-            _baseColorSchemeService = baseColorSchemeService;
-            _configurationService = configurationService;
-
-            SwitchTheme = new Command(OnSwitchThemeExecute);
+            SwitchTheme = new Command(ServiceProvider, OnSwitchThemeExecute);
         }
 
         public bool IsInDarkMode { get; private set; }

@@ -4,17 +4,15 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using Catel.Logging;
     using Humanizer;
     using Models;
+    using Microsoft.Extensions.Logging;
     using Orc.FileSystem;
 
     public class PackageCleaner : CleanerBase
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
-        public PackageCleaner(IDirectoryService directoryService, IFileService fileService)
-            : base(directoryService, fileService)
+        public PackageCleaner(IDirectoryService directoryService, IFileService fileService, ILogger<PackageCleaner> logger)
+            : base(directoryService, fileService, logger)
         {
         }
 
@@ -54,7 +52,7 @@
                     releaseSize += fileInfo.Length;
                 }
 
-                Log.Info($"Found release that can be purged: '{releaseToPurge}' ({releaseSize.Bytes().Humanize("#.#")})");
+                Logger.LogInformation("Found release that can be purged: {Release} ({ReleaseSize})", releaseToPurge, releaseSize.Bytes().Humanize("#.#"));
             }
 
             return size;
@@ -77,7 +75,7 @@
                         var line = release.DeltaLineInReleasesFile;
                         if (string.IsNullOrWhiteSpace(line))
                         {
-                            Log.Warning($"Line is missing for DELTA release package '{release}'");
+                            Logger.LogWarning("Line is missing for DELTA release package {Release}", release);
                         }
                         else
                         {
@@ -90,7 +88,7 @@
                         var line = release.FullLineInReleasesFile;
                         if (string.IsNullOrWhiteSpace(line))
                         {
-                            Log.Warning($"Line is missing for FULL release package '{release}'");
+                            Logger.LogWarning("Line is missing for FULL release package {Release}", release);
                         }
                         else
                         {
@@ -102,7 +100,7 @@
                 {
                     if (_fileService.Exists(deltaFileName))
                     {
-                        Log.Debug($"Deleting file '{deltaFileName}'");
+                        Logger.LogDebug("Deleting file {FileName}", deltaFileName);
 
                         if (!isFakeClean)
                         {
@@ -112,7 +110,7 @@
 
                     if (_fileService.Exists(fullFileName))
                     {
-                        Log.Debug($"Deleting file '{fullFileName}'");
+                        Logger.LogDebug("Deleting file {FileName}", fullFileName);
 
                         if (!isFakeClean)
                         {
@@ -122,7 +120,7 @@
                 }
             }
 
-            Log.Debug($"Updating releases file '{releasesFileName}'");
+            Logger.LogDebug("Updating releases file {FileName}", releasesFileName);
 
             if (!isFakeClean)
             {

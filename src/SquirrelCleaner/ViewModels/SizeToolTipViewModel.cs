@@ -8,16 +8,13 @@
     using Humanizer;
     using Models;
 
-    internal class SizeToolTipViewModel : ViewModelBase
+    internal partial class SizeToolTipViewModel : ViewModelBase
     {
+        [InjectedModel]
         private readonly Channel _channel;
 
-        public SizeToolTipViewModel(Channel channel)
+        partial void OnConstructed()
         {
-            ArgumentNullException.ThrowIfNull(channel);
-
-            _channel = channel;
-
             Items = new ObservableCollection<string>();
         }
 

@@ -1,5 +1,4 @@
 using System.Reflection;
-//using Catel.Logging;
 using System;
 using System.Globalization;
 
@@ -32,8 +31,5 @@ internal static class MethodTimeLogger
         // {
             // finalMessage += $" | {message}";
         // }
-
-        // var logger = LogManager.GetLogger(type);
-        // logger.Debug(finalMessage);
     }
 }

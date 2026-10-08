@@ -2,9 +2,5 @@
 {
     public partial class SummaryView
     {
-        public SummaryView()
-        {
-            InitializeComponent();
-        }
     }
 }

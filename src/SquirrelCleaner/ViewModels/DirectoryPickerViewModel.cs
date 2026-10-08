@@ -3,33 +3,23 @@
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Catel;
     using Catel.MVVM;
     using Catel.Services;
     using Orc.FileSystem;
 
-    public class DirectoryPickerViewModel : ViewModelBase
+    public partial class DirectoryPickerViewModel : ViewModelBase
     {
-        #region Constructors
-        public DirectoryPickerViewModel(ISelectDirectoryService selectDirectoryService, IProcessService processService,
-            IDirectoryService directoryService)
-        {
-            ArgumentNullException.ThrowIfNull(selectDirectoryService);
-            ArgumentNullException.ThrowIfNull(processService);
-            ArgumentNullException.ThrowIfNull(directoryService);
-
-            _selectDirectoryService = selectDirectoryService;
-            _processService = processService;
-            _directoryService = directoryService;
-
-            OpenDirectory = new Command(OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
-            SelectDirectory = new TaskCommand(OnSelectDirectoryExecuteAsync);
-        }
-        #endregion
-
         #region Fields
+        [InjectedService]
         private readonly IProcessService _processService;
+
+        [InjectedService]
         private readonly IDirectoryService _directoryService;
+
+        [InjectedService]
         private readonly ISelectDirectoryService _selectDirectoryService;
+
         #endregion
 
         #region Properties
@@ -79,6 +69,12 @@
         /// Gets the SelectDirectory command.
         /// </summary>
         public TaskCommand SelectDirectory { get; private set; }
+
+        partial void OnConstructed()
+        {
+            OpenDirectory = new Command(ServiceProvider, OnOpenDirectoryExecute, OnOpenDirectoryCanExecute);
+            SelectDirectory = new TaskCommand(ServiceProvider, OnSelectDirectoryExecuteAsync);
+        }
 
         /// <summary>
         /// Method to invoke when the SelectOutputDirectory command is executed.

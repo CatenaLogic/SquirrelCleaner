@@ -2,24 +2,18 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Catel;
     using Catel.Fody;
     using Catel.MVVM;
     using Models;
     using Services;
 
-    internal class ChannelViewModel : ViewModelBase
+    internal partial class ChannelViewModel : FeaturedViewModelBase
     {
+        [InjectedService]
         private readonly ICleanerService _cleanerService;
 
-        public ChannelViewModel(Channel channel, ICleanerService cleanerService)
-        {
-            ArgumentNullException.ThrowIfNull(channel);
-            ArgumentNullException.ThrowIfNull(cleanerService);
-
-            Channel = channel;
-            _cleanerService = cleanerService;
-        }
-
+        [InjectedModel]
         [Model(SupportIEditableObject = false)]
         [Expose("Name")]
         [Expose("Product")]

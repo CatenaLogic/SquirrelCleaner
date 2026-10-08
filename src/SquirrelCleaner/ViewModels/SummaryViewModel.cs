@@ -8,26 +8,20 @@
     using Catel;
     using Catel.Collections;
     using Catel.Data;
-    using Catel.Logging;
     using Catel.MVVM;
     using Models;
 
-    internal class SummaryViewModel : ViewModelBase
+    internal partial class SummaryViewModel : ViewModelBase
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
+        [InjectedModel]
         private readonly FastObservableCollection<Channel> _channels;
-        private readonly ChangeNotificationWrapper _changeNotificationWrapper;
 
+        private ChangeNotificationWrapper _changeNotificationWrapper;
         private bool _hasPendingUpdates;
 
-        public SummaryViewModel(FastObservableCollection<Channel> channels)
+        partial void OnConstructed()
         {
-            ArgumentNullException.ThrowIfNull(channels);
-
-            _channels = channels;
-
-            _changeNotificationWrapper = new ChangeNotificationWrapper(channels);
+            _changeNotificationWrapper = new ChangeNotificationWrapper(_channels);
         }
 
         public int ChannelsToClean { get; private set; }
@@ -74,8 +68,6 @@
 
             using (CreateIsBusyScope())
             {
-                //Log.Debug("Updating summary");
-
                 var channels = _channels.Where(x => x.IsIncluded).ToList();
 
                 ChannelsToClean = channels.Count;
@@ -90,7 +82,6 @@
                     }
                 }
 
-                //Log.Debug("Updated summary");
             }
 
             if (_hasPendingUpdates)

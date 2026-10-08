@@ -6,30 +6,32 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Catel;
-    using Catel.Logging;
     using MethodTimer;
     using Models;
+    using Microsoft.Extensions.Logging;
     using Orc.FileSystem;
     using Semver;
 
     internal class ChannelService : IChannelService
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private readonly ILogger<ChannelService> _logger;
 
         private readonly ICleanerService _cleanerService;
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
 
         public ChannelService(ICleanerService cleanerService, IDirectoryService directoryService,
-            IFileService fileService)
+            IFileService fileService, ILogger<ChannelService> logger)
         {
             ArgumentNullException.ThrowIfNull(cleanerService);
             ArgumentNullException.ThrowIfNull(directoryService);
             ArgumentNullException.ThrowIfNull(fileService);
+            ArgumentNullException.ThrowIfNull(logger);
 
             _cleanerService = cleanerService;
             _directoryService = directoryService;
             _fileService = fileService;
+            _logger = logger;
         }
 
         [Time]
@@ -37,11 +39,11 @@
         {
             Argument.IsNotNullOrWhitespace(() => channelsRoot);
 
-            Log.Info("Searching for channels in root '{0}'", channelsRoot);
+            _logger.LogInformation("Searching for channels in root {ChannelsRoot}", channelsRoot);
 
             if (!_directoryService.Exists(channelsRoot))
             {
-                Log.Warning("Directory '{0}' does not exist, cannot find any channels", channelsRoot);
+                _logger.LogWarning("Directory {ChannelsRoot} does not exist, cannot find any channels", channelsRoot);
                 return Enumerable.Empty<Channel>();
             }
 
@@ -88,7 +90,7 @@
                         }
                         catch (Exception ex)
                         {
-                            Log.Warning(ex, $"Failed to process file '{file}'");
+                            _logger.LogWarning(ex, "Failed to process file {FileName}", file);
                         }
                     }
 
@@ -99,13 +101,13 @@
                                                     .OrderByDescending(x => x.Version, SemVersion.SortOrderComparer)
                                                     .Select(x => x.Version).FirstOrDefault();
 
-                    Log.Debug($"Found channel '{channel}' with '{channel.Releases.Count}' releases, last stable release '{channel.LastStableRelease}'");
+                    _logger.LogDebug("Found channel {Channel} with {ReleaseCount} releases, last stable release {LastStableRelease}", channel, channel.Releases.Count, channel.LastStableRelease);
 
                     cleanableChannels.Add(channel);
                 }
             }
 
-            Log.Info("Found {0} channels in root '{1}'", cleanableChannels.Count, channelsRoot);
+            _logger.LogInformation("Found {ChannelCount} channels in root {ChannelsRoot}", cleanableChannels.Count, channelsRoot);
 
             return cleanableChannels;
         }
@@ -114,16 +116,16 @@
         {
             // We have several rules out of the box to determine if a directory is a channel
 
-            Log.Debug("Checking if a '{0}' is a channel", directory);
+            _logger.LogDebug("Checking if {Directory} is a channel", directory);
 
             var releasesFile = Path.Combine(directory, "RELEASES");
             if (File.Exists(releasesFile))
             {
-                Log.Debug("Directory '{0}' is a channel because it contains a RELEASES file in the root", directory);
+                _logger.LogDebug("Directory {Directory} is a channel because it contains a RELEASES file in the root", directory);
                 return true;
             }
 
-            Log.Debug("Directory '{0}' is not considered a channel", directory);
+            _logger.LogDebug("Directory {Directory} is not considered a channel", directory);
 
             return false;
         }
