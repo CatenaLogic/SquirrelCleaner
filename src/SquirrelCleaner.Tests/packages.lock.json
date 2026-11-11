@@ -57,11 +57,11 @@
       },
       "Microsoft.Extensions.DependencyInjection": {
         "type": "Direct",
-        "requested": "[10.0.*, )",
-        "resolved": "10.0.15",
-        "contentHash": "7DUIgHeJpBs1RG0hYwWDOImXP03+uPrV5KtyUPxrZsiWadlg95aYijNKCZ2j2UmufQAmN6XEQfx4B/J6TuE7lg==",
+        "requested": "[11.0.*, )",
+        "resolved": "11.0.0",
+        "contentHash": "KygQMITBDDPXw7+AAgdwQvVAaTXuDsc1iCAuvhO73ERxKX+d92cdbgZmpoYF7DIUq2hfs/yO2KD87uIreRy3MA==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.15"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "11.0.0"
         }
       },
       "Microsoft.Extensions.Logging.Console": {
@@ -146,11 +146,11 @@
       },
       "Catel.MVVM": {
         "type": "Transitive",
-        "resolved": "7.0.1",
-        "contentHash": "Xi0YNsSBHlySyLxxfvcbnDZ9GEQqoM/RTc4zVGHOeeUzgzpNFabwFd1mp+gfXjYuGQrWqo6BZRumMIid8zW7RQ==",
+        "resolved": "7.1.0",
+        "contentHash": "CGaJzR49JIhfWKxxRw1X0nkBT3qfyafyEsuOMO82CHsPN38ei3LCSzCzeXRlg0ZeUlps+jkHpuO21uAQ1Dzsfw==",
         "dependencies": {
-          "Catel.Core": "7.0.1",
-          "Microsoft.Xaml.Behaviors.Wpf": "1.1.158",
+          "Catel.Core": "7.1.0",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.161",
           "System.ComponentModel.Annotations": "5.0.0"
         }
       },
@@ -741,8 +741,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "10.0.15",
-        "contentHash": "KczR2nV7ooeimtZxAawPht/FJUHnX+uoWy7y4pba+iaRQBwUM2NwtiqZg+/FpZDHUf2RkkzveGkhMTWDNzmDUA=="
+        "resolved": "11.0.0",
+        "contentHash": "a2c4Kp55miXT6G+DSb75pczXQJHgNMzPyZEyMxrrKxuQrgvctcDWJWD9fVe/uGbQdu4Z0c3B7AVKp1DXmD64nQ=="
       },
       "Microsoft.Extensions.DependencyModel": {
         "type": "Transitive",
@@ -975,8 +975,8 @@
       },
       "Microsoft.Xaml.Behaviors.Wpf": {
         "type": "Transitive",
-        "resolved": "1.1.158",
-        "contentHash": "TPQyXvLV/p4/RUeSqaEOUE2pBipFlvNVdrAsTd1qgNzBoIEN2UMJHwH0SrcUFVuDWqpZbphjXiZ/fGA9WnmbTg=="
+        "resolved": "1.1.161",
+        "contentHash": "V20pH5zYDm6RPjqASdDiidUckWreGntPwDx1YUEMXiRqMVSHvypAiwSeET3ZwoJbFLMTsXXxqsoyhkNOB3Vp4Q=="
       },
       "Orc.Automation": {
         "type": "Transitive",
@@ -997,8 +997,8 @@
       },
       "Orc.Controls": {
         "type": "Transitive",
-        "resolved": "6.0.0",
-        "contentHash": "tqZybfFZSBVjjUszTQmiqqhQutaJQewDAy2GzmwUFRUdWNekNGJGTJJEuPZXRJeUvnolTdZos9BsPcG8QpsvMg==",
+        "resolved": "6.1.0",
+        "contentHash": "CVzyknBtcwkLIfFf8ASdSMMf0YyXkbBCqWBErhcs9yUhsGbMOHkisFBHly+PwYihYS7SeVu4qGStQA4siJjsRA==",
         "dependencies": {
           "Orc.Automation": "6.0.1",
           "Orc.FileSystem": "6.0.0",
@@ -1092,13 +1092,14 @@
       "squirrelcleaner": {
         "type": "Project",
         "dependencies": {
-          "Catel.MVVM": "[7.0.1, )",
+          "Catel.MVVM": "[7.1.0, )",
           "Humanizer": "[3.0.10, )",
+          "Microsoft.Extensions.DependencyInjection": "[11.0.0, )",
           "Microsoft.Extensions.Hosting": "[10.0.*, )",
           "Microsoft.Extensions.Logging": "[10.0.*, )",
           "Microsoft.Extensions.Logging.Debug": "[10.0.*, )",
           "Orc.CommandLine": "[5.0.0, )",
-          "Orc.Controls": "[6.0.0, )",
+          "Orc.Controls": "[6.1.0, )",
           "Orc.LogViewer": "[6.0.0, )",
           "Orc.Notifications": "[6.0.0, )",
           "Orc.Theming": "[6.0.0, )",
